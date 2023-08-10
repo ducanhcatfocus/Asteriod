@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4ceca044cf1a94c956655086b99f38, type: 3}
+  m_Name: ATKUpSO
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: cf38ba9a03116bb4385f5ce5fc824045, type: 3}
+  des: ATK +1
+  id: 1
+  value: 10

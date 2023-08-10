@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f62e8dcfd1f47a49b78fea0b24a639c, type: 3}
+  m_Name: NormalEnemySO
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 1.5
+  dmg: 10
+  colliderDmg: 0
+  range: 5
+  def: 0
+  firerate: 3
+  bulletSpeed: 100
+  exp: 80
+  sprites:
+  - {fileID: 21300000, guid: 349eaa95abd25954993cda10d20472a1, type: 3}
+  - {fileID: 21300000, guid: ff63cf59893b6344db13b05e1bace4f2, type: 3}
+  - {fileID: 21300000, guid: 82af6431f6cd00546aa9a7c2d34551c1, type: 3}
+  - {fileID: 21300000, guid: de8d6977e74a84f4997909ef337344c4, type: 3}
+  - {fileID: 21300000, guid: f293a3122d3d1ee4f99e40b7c6d24b2f, type: 3}
+  - {fileID: 21300000, guid: c2f0f13e3981b2045aa291964abc5a06, type: 3}
+  bulletSprites:
+  - {fileID: -1216071648, guid: 034640ef59a5b2f49a62eb4dc071d628, type: 3}
+  - {fileID: 1290979296, guid: f074fc74a06916e42a4ed4bae2357da7, type: 3}
+  - {fileID: -816398784, guid: 168de487e718c4b4d9e97ade8bc84d68, type: 3}
+  - {fileID: -137043913, guid: 0278543585759df45a540acabf0a4935, type: 3}
+  - {fileID: 676132178, guid: 925108b9ccd39a847a1434f24c1b818b, type: 3}
+  - {fileID: -1255351875, guid: 23bdc7a3b7090254a9d16b09f35385e7, type: 3}
