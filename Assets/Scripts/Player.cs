@@ -167,10 +167,11 @@ public class Player : MonoBehaviour
             isInvincible = true;
 
             curentHp -= dmg;
-            float percent = (float)curentHp / hp + hpinc; 
+            float percent = (float)curentHp / (hp + hpinc); 
 
             if (curentHp  <= 0)
             {
+                hPbar.UpdateHP(percent);
                 GameManager.Instance.SetGameOver();
                 return;
             }
@@ -229,6 +230,9 @@ public class Player : MonoBehaviour
     {
         hpinc += value;
         curentHp += value;
+        float percent = (float)curentHp / (hp + hpinc);
+        hPbar.UpdateHP(percent);
+
     }
 
     public void AddEXPgainRate(float value)

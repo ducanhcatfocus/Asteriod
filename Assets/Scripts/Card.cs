@@ -57,9 +57,12 @@ public class Card : MonoBehaviour
                 break;
             case 8:
                 player.AddRearAttack();
+                cardSpawner.RemoveOneCard(id);
                 break;
             case 9:
                 player.AddDoubleAttack(value);
+                cardSpawner.RemoveOneCard(id);
+
                 break;
             default: break;
         }
