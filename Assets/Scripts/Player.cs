@@ -176,6 +176,7 @@ public class Player : MonoBehaviour
             if (curentHp  <= 0)
             {
                 hPbar.UpdateHP(percent);
+                Destroy(gameObject);
                 GameManager.Instance.SetGameOver();
                 return;
             }
