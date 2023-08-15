@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public bool isInvincible;
 
     public Bullet BulletPrefab;
+    public Sprite bulletSprite;
     public Transform shootPos;
     public Transform rearShootPos;
     public Transform firstPos;
@@ -111,6 +112,8 @@ public class Player : MonoBehaviour
         bullet.Projetile(direction, bulletSpeed);
         bullet.dmg = (dmg + dmginc) * (1f - baseDmgReduce);
         bullet.eBullet = EBullet.playerBullet;
+        SpriteRenderer spriteRenderer = bullet.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = bulletSprite;
     }
 
     private void Shoot()
