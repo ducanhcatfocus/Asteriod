@@ -45,7 +45,7 @@ public class PoolingManager : MonoBehaviour
            
                 if ((objPool as MonoBehaviour).gameObject.activeSelf == false)
                 {
-                    Debug.Log(objPool);
+  
                     target = objPool;
                     break;
 

@@ -94,9 +94,11 @@ public class Asteroid : MonoBehaviour, IPoolable
         Vector2 position = transform.position;
         position += Random.insideUnitCircle * 0.5f;
         Asteroid newAsteroid = PoolingManager.Instance.GetFromPool(this);
+        newAsteroid.size = size * 0.5f;
+        newAsteroid.transform.localScale = 0.5f * size * Vector3.one;
+        newAsteroid._rigidbody2D.mass = 0.5f * size;
         newAsteroid.transform.position = position;
         newAsteroid.transform.rotation = Quaternion.identity;
-        newAsteroid.size = size * 0.5f;
         newAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * speed);
     }
 }
