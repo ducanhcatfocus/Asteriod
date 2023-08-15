@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour
+public class Asteroid : MonoBehaviour, IPoolable
 {
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
@@ -11,7 +11,8 @@ public class Asteroid : MonoBehaviour
     public float maxSize = 3f;
     public float speed = 50f;
 
-    public float maxLifeTime = 30f;
+    public float elapsedTime = 0;
+    public float AstrroidLifeTime = 60f;
 
 
     public List<Sprite> sprites = new List<Sprite>();
@@ -33,18 +34,28 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        DestroyAstrroidAftetElapsedTime();
     }
 
     public void SetTrajectory(Vector2 direction)
     {
         _rigidbody2D.AddForce(direction * speed);
-        Destroy(gameObject, maxLifeTime);
+  
     }
 
+    public void ResetElapsedTime()
+    {
+        elapsedTime = 0.0f;
+    }
+    private void DestroyAstrroidAftetElapsedTime()
+    {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= AstrroidLifeTime)
+        {
+            gameObject.SetActive(false);
 
-
- 
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -52,28 +63,40 @@ public class Asteroid : MonoBehaviour
         {
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet.eBullet == EBullet.enemyBullet) return;
-            if (size * 0.5f >= minSize)
-            {
-                CreateSplit();
-                CreateSplit();
+            IsCanCreateSplit();
+            collision.gameObject.SetActive(false);
+            gameObject.SetActive(false);
 
-            }
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+
         }
         if (collision.CompareTag("Player"))
         {
             Player player = collision.GetComponent<Player>();
             player.TakeDmg(size * 10);
+            IsCanCreateSplit();
+            gameObject.SetActive(false);
         }
+    }
+
+    private void IsCanCreateSplit()
+    {
+        if (size * 0.5f >= minSize)
+        {
+            CreateSplit();
+            CreateSplit();
+
+        }
+   
     }
 
     private void CreateSplit()
     {
         Vector2 position = transform.position;
         position += Random.insideUnitCircle * 0.5f;
-        Asteroid newAteroid = Instantiate(this, position, Quaternion.identity);
-        newAteroid.size = size * 0.5f;
-        newAteroid.SetTrajectory(Random.insideUnitCircle.normalized * speed);
+        Asteroid newAsteroid = PoolingManager.Instance.GetFromPool(this);
+        newAsteroid.transform.position = position;
+        newAsteroid.transform.rotation = Quaternion.identity;
+        newAsteroid.size = size * 0.5f;
+        newAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * speed);
     }
 }

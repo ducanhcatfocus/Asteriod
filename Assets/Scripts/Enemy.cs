@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.EventSystems.EventTrigger;
 
 
@@ -93,7 +94,9 @@ public class Enemy : MonoBehaviour
         if(currentTime >= firerate)
         {
             currentTime = 0;
-            Bullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Bullet bullet = PoolingManager.Instance.GetFromPool(bulletPrefab);
+            
+            bullet.transform.position = transform.position;
             bullet.Projetile(transform.right, bulletSpeed);
             bullet.dmg = dmg;
             bullet.eBullet = EBullet.enemyBullet;
@@ -118,7 +121,7 @@ public class Enemy : MonoBehaviour
             Bullet bullet = collision.GetComponent<Bullet>();
             if (bullet.eBullet == EBullet.enemyBullet) return;
             TakeDmg(bullet.dmg);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 

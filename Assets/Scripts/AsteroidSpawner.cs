@@ -23,13 +23,15 @@ public class AsteroidSpawner : MonoBehaviour
         {
             Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
             Vector3 spawnPoint = playerPos.position + spawnDirection;
-
             float variance = Random.Range(-trajectoryVariance, trajectoryVariance);
             Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
-
-             Asteroid asteroid = Instantiate(asteroidPrefab, spawnPoint, rotation, transform);
-            asteroid.size = Random.Range(asteroid.minSize, asteroid.maxSize);
-            asteroid.SetTrajectory(rotation * -spawnDirection);
+            Asteroid asteroid = PoolingManager.Instance.GetFromPool(asteroidPrefab);
+          
+                asteroid.transform.position = spawnPoint;
+                asteroid.transform.rotation = rotation;
+                asteroid.size = Random.Range(asteroid.minSize, asteroid.maxSize);
+                asteroid.SetTrajectory(rotation * -spawnDirection);
+            
         }
     }
 }

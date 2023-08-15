@@ -106,7 +106,8 @@ public class Player : MonoBehaviour
 
     private void InstantiateBullet(Vector3 position, Vector3 direction)
     {
-        Bullet bullet = Instantiate(BulletPrefab, position, Quaternion.identity);
+        Bullet bullet = PoolingManager.Instance.GetFromPool(BulletPrefab);
+        bullet.transform.position = position;
         bullet.Projetile(direction, bulletSpeed);
         bullet.dmg = (dmg + dmginc) * (1f - baseDmgReduce);
         bullet.eBullet = EBullet.playerBullet;
@@ -146,7 +147,7 @@ public class Player : MonoBehaviour
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet.eBullet == EBullet.playerBullet) return;
             TakeDmg(bullet.dmg);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
 
         }
     }
